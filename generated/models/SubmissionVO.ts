@@ -2,12 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 import type { JudgeInfo } from './JudgeInfo';
 import type { QuestionVO } from './QuestionVO';
 import type { UserVO } from './UserVO';
-
-export type QuestionSubmitVO = {
+export type SubmissionVO = {
     code?: string;
     createTime?: string;
     id?: number;
@@ -20,3 +18,4 @@ export type QuestionSubmitVO = {
     userId?: number;
     userVO?: UserVO;
 };
+

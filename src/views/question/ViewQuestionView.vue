@@ -64,9 +64,8 @@
 import { onMounted, ref, withDefaults, defineProps } from "vue";
 import {
   QuestionControllerService,
-  QuestionSubmitAddRequest,
-  QuestionSubmitControllerService,
   QuestionVO,
+  SubmissionAddRequest,
 } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 import CodeEditor from "@/components/CodeEditor.vue";
@@ -93,7 +92,7 @@ const loadData = async () => {
   }
 };
 
-const form = ref<QuestionSubmitAddRequest>({
+const form = ref<SubmissionAddRequest>({
   language: "java",
   code: "",
 });
@@ -105,7 +104,7 @@ const doSubmit = async () => {
   if (!question.value?.id) {
     return;
   }
-  const res = await QuestionSubmitControllerService.doQuestionSubmitUsingPost({
+  const res = await QuestionControllerService.doSubmitUsingPost({
     ...form.value,
     questionId: question.value.id,
   });

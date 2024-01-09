@@ -2,19 +2,18 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 import type { OrderItem } from './OrderItem';
-import type { QuestionSubmitVO } from './QuestionSubmitVO';
-
-export type Page_QuestionSubmitVO_ = {
+import type { SubmissionVO } from './SubmissionVO';
+export type Page_SubmissionVO_ = {
     countId?: string;
     current?: number;
     maxLimit?: number;
     optimizeCountSql?: boolean;
     orders?: Array<OrderItem>;
     pages?: number;
-    records?: Array<QuestionSubmitVO>;
+    records?: Array<SubmissionVO>;
     searchCount?: boolean;
     size?: number;
     total?: number;
 };
+

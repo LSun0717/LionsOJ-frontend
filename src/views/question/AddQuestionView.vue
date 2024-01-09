@@ -110,13 +110,13 @@ const updatePage = route.path.includes("update");
 
 let form = ref({
   title: "",
+  content: "",
   tags: [],
   answer: "",
-  content: "",
   judgeConfig: {
+    timeLimit: 1000,
     memoryLimit: 1000,
     stackLimit: 1000,
-    timeLimit: 1000,
   },
   judgeCase: [
     {
@@ -134,11 +134,12 @@ const loadData = async () => {
   if (!id) {
     return;
   }
-  const res = await QuestionControllerService.getQuestionByIdUsingGet(
+  const res = await QuestionControllerService.getQuestionVoByIdUsingGet(
     id as any
   );
   if (res.code === 0) {
     form.value = res.data as any;
+    console.log("form.value", form.value);
     // json 转 js 对象
     if (!form.value.judgeCase) {
       form.value.judgeCase = [
@@ -157,12 +158,12 @@ const loadData = async () => {
         timeLimit: 1000,
       };
     } else {
-      form.value.judgeConfig = JSON.parse(form.value.judgeConfig as any);
+      // form.value.judgeConfig = JSON.parse(form.value.judgeConfig as any);
     }
     if (!form.value.tags) {
       form.value.tags = [];
     } else {
-      form.value.tags = JSON.parse(form.value.tags as any);
+      // form.value.tags = JSON.parse(form.value.tags as any);
     }
   } else {
     message.error("加载失败，" + res.message);

@@ -12,6 +12,9 @@
       }"
       @page-change="onPageChange"
     >
+      <template #judgeInfo="{ record }">
+        {{ JSON.stringify(record.judgeConfig) }}
+      </template>
       <template #optional="{ record }">
         <a-space>
           <a-button type="primary" @click="doUpdate(record)"> 修改</a-button>
@@ -24,14 +27,8 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watchEffect } from "vue";
-import {
-  Page_Question_,
-  Question,
-  QuestionControllerService,
-  QuestionQueryRequest,
-} from "../../../generated";
+import { QuestionVO, QuestionControllerService } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
-import * as querystring from "querystring";
 import { useRouter } from "vue-router";
 
 const tableRef = ref();
@@ -44,7 +41,7 @@ const searchParams = ref({
 });
 
 const loadData = async () => {
-  const res = await QuestionControllerService.listQuestionByPageUsingPost(
+  const res = await QuestionControllerService.listMyQuestionVoByPageUsingPost(
     searchParams.value
   );
   if (res.code === 0) {
@@ -103,6 +100,7 @@ const columns = [
   {
     title: "判题配置",
     dataIndex: "judgeConfig",
+    slotName: "judgeConfig",
   },
   {
     title: "判题用例",
@@ -129,7 +127,7 @@ const onPageChange = (page: number) => {
   };
 };
 
-const doDelete = async (question: Question) => {
+const doDelete = async (question: QuestionVO) => {
   const res = await QuestionControllerService.deleteQuestionUsingPost({
     id: question.id,
   });
@@ -143,7 +141,7 @@ const doDelete = async (question: Question) => {
 
 const router = useRouter();
 
-const doUpdate = (question: Question) => {
+const doUpdate = (question: QuestionVO) => {
   router.push({
     path: "/update/question",
     query: {

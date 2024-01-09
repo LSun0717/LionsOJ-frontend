@@ -4,22 +4,20 @@
 /* eslint-disable */
 import type { BaseResponse_boolean_ } from '../models/BaseResponse_boolean_';
 import type { BaseResponse_long_ } from '../models/BaseResponse_long_';
-import type { BaseResponse_Page_Question_ } from '../models/BaseResponse_Page_Question_';
 import type { BaseResponse_Page_QuestionVO_ } from '../models/BaseResponse_Page_QuestionVO_';
-import type { BaseResponse_Question_ } from '../models/BaseResponse_Question_';
+import type { BaseResponse_Page_SubmissionVO_ } from '../models/BaseResponse_Page_SubmissionVO_';
 import type { BaseResponse_QuestionVO_ } from '../models/BaseResponse_QuestionVO_';
 import type { DeleteRequest } from '../models/DeleteRequest';
 import type { QuestionAddRequest } from '../models/QuestionAddRequest';
 import type { QuestionEditRequest } from '../models/QuestionEditRequest';
 import type { QuestionQueryRequest } from '../models/QuestionQueryRequest';
 import type { QuestionUpdateRequest } from '../models/QuestionUpdateRequest';
-
+import type { SubmissionAddRequest } from '../models/SubmissionAddRequest';
+import type { SubmissionQueryRequest } from '../models/SubmissionQueryRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-
 export class QuestionControllerService {
-
     /**
      * addQuestion
      * @param questionAddRequest questionAddRequest
@@ -28,8 +26,8 @@ export class QuestionControllerService {
      * @throws ApiError
      */
     public static addQuestionUsingPost(
-questionAddRequest: QuestionAddRequest,
-): CancelablePromise<BaseResponse_long_ | any> {
+        questionAddRequest: QuestionAddRequest,
+    ): CancelablePromise<BaseResponse_long_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/question/add',
@@ -41,7 +39,6 @@ questionAddRequest: QuestionAddRequest,
             },
         });
     }
-
     /**
      * deleteQuestion
      * @param deleteRequest deleteRequest
@@ -50,8 +47,8 @@ questionAddRequest: QuestionAddRequest,
      * @throws ApiError
      */
     public static deleteQuestionUsingPost(
-deleteRequest: DeleteRequest,
-): CancelablePromise<BaseResponse_boolean_ | any> {
+        deleteRequest: DeleteRequest,
+    ): CancelablePromise<BaseResponse_boolean_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/question/delete',
@@ -63,7 +60,6 @@ deleteRequest: DeleteRequest,
             },
         });
     }
-
     /**
      * editQuestion
      * @param questionEditRequest questionEditRequest
@@ -72,8 +68,8 @@ deleteRequest: DeleteRequest,
      * @throws ApiError
      */
     public static editQuestionUsingPost(
-questionEditRequest: QuestionEditRequest,
-): CancelablePromise<BaseResponse_boolean_ | any> {
+        questionEditRequest: QuestionEditRequest,
+    ): CancelablePromise<BaseResponse_boolean_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/question/edit',
@@ -85,30 +81,6 @@ questionEditRequest: QuestionEditRequest,
             },
         });
     }
-
-    /**
-     * getQuestionById
-     * @param id id
-     * @returns BaseResponse_Question_ OK
-     * @throws ApiError
-     */
-    public static getQuestionByIdUsingGet(
-id?: number,
-): CancelablePromise<BaseResponse_Question_> {
-        return __request(OpenAPI, {
-            method: 'GET',
-            url: '/api/question/get',
-            query: {
-                'id': id,
-            },
-            errors: {
-                401: `Unauthorized`,
-                403: `Forbidden`,
-                404: `Not Found`,
-            },
-        });
-    }
-
     /**
      * getQuestionVOById
      * @param id id
@@ -116,8 +88,8 @@ id?: number,
      * @throws ApiError
      */
     public static getQuestionVoByIdUsingGet(
-id?: number,
-): CancelablePromise<BaseResponse_QuestionVO_> {
+        id?: number,
+    ): CancelablePromise<BaseResponse_QuestionVO_> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/question/get/vo',
@@ -131,29 +103,6 @@ id?: number,
             },
         });
     }
-
-    /**
-     * listQuestionByPage
-     * @param questionQueryRequest questionQueryRequest
-     * @returns BaseResponse_Page_Question_ OK
-     * @returns any Created
-     * @throws ApiError
-     */
-    public static listQuestionByPageUsingPost(
-questionQueryRequest: QuestionQueryRequest,
-): CancelablePromise<BaseResponse_Page_Question_ | any> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/api/question/list/page',
-            body: questionQueryRequest,
-            errors: {
-                401: `Unauthorized`,
-                403: `Forbidden`,
-                404: `Not Found`,
-            },
-        });
-    }
-
     /**
      * listQuestionVOByPage
      * @param questionQueryRequest questionQueryRequest
@@ -162,8 +111,8 @@ questionQueryRequest: QuestionQueryRequest,
      * @throws ApiError
      */
     public static listQuestionVoByPageUsingPost(
-questionQueryRequest: QuestionQueryRequest,
-): CancelablePromise<BaseResponse_Page_QuestionVO_ | any> {
+        questionQueryRequest: QuestionQueryRequest,
+    ): CancelablePromise<BaseResponse_Page_QuestionVO_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/question/list/page/vo',
@@ -175,7 +124,6 @@ questionQueryRequest: QuestionQueryRequest,
             },
         });
     }
-
     /**
      * listMyQuestionVOByPage
      * @param questionQueryRequest questionQueryRequest
@@ -184,8 +132,8 @@ questionQueryRequest: QuestionQueryRequest,
      * @throws ApiError
      */
     public static listMyQuestionVoByPageUsingPost(
-questionQueryRequest: QuestionQueryRequest,
-): CancelablePromise<BaseResponse_Page_QuestionVO_ | any> {
+        questionQueryRequest: QuestionQueryRequest,
+    ): CancelablePromise<BaseResponse_Page_QuestionVO_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/question/my/list/page/vo',
@@ -197,7 +145,48 @@ questionQueryRequest: QuestionQueryRequest,
             },
         });
     }
-
+    /**
+     * doSubmit
+     * @param submissionAddRequest submissionAddRequest
+     * @returns BaseResponse_long_ OK
+     * @returns any Created
+     * @throws ApiError
+     */
+    public static doSubmitUsingPost(
+        submissionAddRequest: SubmissionAddRequest,
+    ): CancelablePromise<BaseResponse_long_ | any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/question/submit/do',
+            body: submissionAddRequest,
+            errors: {
+                401: `Unauthorized`,
+                403: `Forbidden`,
+                404: `Not Found`,
+            },
+        });
+    }
+    /**
+     * listSubmissionByPage
+     * @param submissionQueryRequest submissionQueryRequest
+     * @returns BaseResponse_Page_SubmissionVO_ OK
+     * @returns any Created
+     * @throws ApiError
+     */
+    public static listSubmissionByPageUsingPost(
+        submissionQueryRequest: SubmissionQueryRequest,
+    ): CancelablePromise<BaseResponse_Page_SubmissionVO_ | any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/question/submit/list/page',
+            body: submissionQueryRequest,
+            errors: {
+                401: `Unauthorized`,
+                403: `Forbidden`,
+                404: `Not Found`,
+            },
+        });
+    }
     /**
      * updateQuestion
      * @param questionUpdateRequest questionUpdateRequest
@@ -206,8 +195,8 @@ questionQueryRequest: QuestionQueryRequest,
      * @throws ApiError
      */
     public static updateQuestionUsingPost(
-questionUpdateRequest: QuestionUpdateRequest,
-): CancelablePromise<BaseResponse_boolean_ | any> {
+        questionUpdateRequest: QuestionUpdateRequest,
+    ): CancelablePromise<BaseResponse_boolean_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/question/update',
@@ -219,5 +208,4 @@ questionUpdateRequest: QuestionUpdateRequest,
             },
         });
     }
-
 }

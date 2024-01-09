@@ -2,14 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
-export type QuestionSubmitQueryRequest = {
-    current?: number;
+export type SubmissionAddRequest = {
+    code?: string;
     language?: string;
-    pageSize?: number;
     questionId?: number;
-    sortField?: string;
-    sortOrder?: string;
-    status?: number;
-    userId?: number;
 };
+
